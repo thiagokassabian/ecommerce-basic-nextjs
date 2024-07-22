@@ -1,5 +1,6 @@
+import useCarrinho from "@/data/hooks/useCarrinho"
 import ItemCarrinho from "@/data/model/ItemCarrinho"
-import { IconMinus, IconPlus } from "@tabler/icons-react";
+import { IconMinus, IconPlus } from "@tabler/icons-react"
 import Image from "next/image"
 
 interface CardItemCarrinhoProps {
@@ -8,6 +9,8 @@ interface CardItemCarrinhoProps {
 
 export default function CardItemCarrinho(props: CardItemCarrinhoProps) {
 	const { item } = props
+
+	const { adicionar, remover } = useCarrinho()
 
 	return (
 		<div className="flex items-center bg-zinc-900 gap-5 pr-5">
@@ -22,11 +25,11 @@ export default function CardItemCarrinho(props: CardItemCarrinhoProps) {
 				</div>
 			</div>
 			<div className="flex items-center gap-3">
-				<button className="hover:text-red-400 transition-all">
+				<button className="hover:text-red-400 transition-all" onClick={() => remover(item.produto)}>
 					<IconMinus />
 				</button>
 				<span className="inline-block py-1 w-10 bg-black text-center">{item.quantidade}</span>
-				<button className="hover:text-green-400 transition-all">
+				<button className="hover:text-green-400 transition-all" onClick={() => adicionar(item.produto)}>
 					<IconPlus />
 				</button>
 			</div>
